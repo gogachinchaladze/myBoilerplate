@@ -118,7 +118,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js"></script>
   
-  <title>My Boilerplate Changed</title>
+  <title>My Boilerplate</title>
 
 <!--  <meta name="description" content="--><?//= $texts['tags']['description'][$lang]?><!--" />-->
 <!--  <meta property="og:type" content="website">-->
