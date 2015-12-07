@@ -56,38 +56,91 @@ var MyLib = (function myLib(){
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
   };
   var ajaxCall = function ajaxCall(options) {
-    //TODO Complete options object !!!
     if(!options){
-      throw "ajaxCall function must has no argument - options!"
+      throw "ajaxCall function has no argument - options!";
     }
+    else if(!options.url || options.url == ""){
+      throw "ajax options has no url specified";
+    }
+
     var customOptions = {
       async : options.async || true,
-      url : "",
-      type : ""
+      data : options.data || {},
+      url : options.url,
+      method : options.method || 'POST',
+      contentType : options.contentType || '',
+      username : options.username || '',
+      password : options.password || '',
+      error : options.error || function(){throw "Some error occured during ajax call!"},
+      success : options.success || function(data){console.log(data)}
     };
-    var xhttp;
-    xhttp=new XMLHttpRequest();
+
+    (customOptions.method == 'post') ? customOptions.contentType = "application/json; charset=utf-8" : customOptions.contentType = "application/x-www-form-urlencoded; charset=UTF-8'";
+
+    var xhttp =new XMLHttpRequest();
+    xhttp.setRequestHeader("Content-type", customOptions.contentType);
     xhttp.onreadystatechange = function() {
       if (xhttp.readyState == 4 && xhttp.status == 200) {
-        cfunc(xhttp);
+        customOptions.success(xhttp);
       }
     };
-    xhttp.open("GET", url, true);
-    xhttp.send();
+
+    xhttp.open(customOptions.method, customOptions.url, customOptions.async);
+    (customOptions.method == "GET") ? xhttp.send() : xhttp.send(JSON.stringify(customOptions.data));
   };
 
-  var publicAPI = {
+  var publicAPI = function selectorFunction(selector){
+    if(selector.indexOf(',') != -1){
+      //That means there are several objects to change
+      var selectorsArr = selector.split(',');
+      for(var i = 0, length = selectorsArr.length;i<length;i++){
+        selectorFunction(selectorsArr[i].trim());
+      }
+    }
+    else{
+      if( selector.indexOf(' ') != -1 ||
+          selector.split('.').length > 2 ||
+          selector.split('#').length > 2 ||
+          selector.indexOf(':') != -1 ||
+          (selector.charAt(0).match(/[a-z]/i) && (selector.indexOf('#') != -1 || selector.indexOf('.') != -1))){
+        //Do querySelector
+      }
+      else if(selector.charAt(0) == '.'){
+        //return document.getElementsByClassName(selector.replace('.',''));
+      }
+      else if(selector.charAt(0) == '#'){
+        //return document.getElementById(selector.replace('#',''));
+      }
+      else if(selector.charAt(0).match(/[a-z]/i)){
+        //return document.getElementsByTagName(selector);
+      }
+      else{
+        //do querySelector by default
+      }
+    }
+  };
+
+  var selectorFunctions = {
     hasClass : hasClass,
     addClass : addClass,
     removeClass : removeClass,
     toggleClass : toggleClass,
-    changeStyle : changeStyle,
+    changeStyle : changeStyle
+  };
+  for(var key in selectorFunctions){
+    publicAPI.prototype[key] = selectorFunctions[key];
+  }
+
+  var usefulFunctions = {
     randomInRange : randomInRange,
     checkIfMobile : checkIfMobile,
     getHashURL : getHashURL,
     getParameterByName : getParameterByName,
     ajaxCall : ajaxCall
   };
+  for(var key in usefulFunctions){
+    publicAPI[key] = usefulFunctions[key];
+  }
 
   return publicAPI;
 })();
