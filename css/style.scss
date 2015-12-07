@@ -1,0 +1,79 @@
+//Mixins from (http://sassdoc.com/theme-gallery/preview/default/#cross-browser-support)
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-o-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+@mixin prefixer($property, $value, $vendors: 'webkit' 'moz' 'o') {
+  @if $vendors {
+    @each $vendor in $vendors {
+      #{'-' + $vendor + '-' + $property}: #{$value};
+    }
+  }
+
+  #{$property}: #{$value};
+}
+@mixin background-position($x,$y){
+  background-position:$x $y;
+  -ms-background-position-x: $x;
+  -ms-background-position-y: $y;
+}
+@mixin pseudo-clear(){
+  content:'';
+  width:0px;
+  height:0px;
+  clear:both;
+  display: block;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.absolutely-centered{
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin:auto;
+  position: absolute;
+}
+
+@import 'reset';
+@import 'keyframes';
+@import 'fonts';
+@import 'plugins';
+@import 'media';
+
+/*Colors Used*/
+$pagecolor : #455933;
+$backcolor : #CCA24B;
+$textcolor : #343122;
+$margin: 10px;
+
+html,body{
+
+}
+body{
+  opacity:0;
+  visibility: hidden;
+//  @include prefixer(transform,translate3d(0,0,0),'webkit' 'moz' 'ms' 'o'); //if you want to include -ms- prefix too. This is basically needed for Transform!
+  @include prefixer(transition,opacity .3s ease 0s);
+  background: red;
+}
+body.loaded{
+  opacity:1;
+  visibility: visible;
+}
