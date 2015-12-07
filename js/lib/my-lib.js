@@ -1,38 +1,101 @@
 //My useful functions (With module pattern)
 var MyLib = (function myLib(){
-  var hasClass = function hasClass(element, cls) {
-    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-  };
-  var addClass = function addClass(element,cls) {
-    if(!hasClass(element,cls)){
-      if(element.className.slice(-1) != " "){
-        element.className += " "+cls;
-      }
-      else{
-        element.className += cls;
-      }
-    }
-  };
-  var removeClass = function removeClass(element,cls) {
-    if (hasClass(element,cls)) {
-      var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-      element.className=element.className.replace(reg,' ');
-    }
-  };
-  var toggleClass = function toggleClass(element,cls) {
-    if(!hasClass(element,cls)){
-      element.className += " "+cls;
+  var hasClass = function hasClass(cls,i) {
+    if(i >= 0){
+      return (' ' + this.selectedObj[i].className + ' ').indexOf(' ' + cls + ' ') > -1;
     }
     else{
-      var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-      element.className=element.className.replace(reg,' ');
+      return (' ' + this.selectedObj.className + ' ').indexOf(' ' + cls + ' ') > -1;
     }
   };
-  var changeStyle = function changeStyle(element,css){
-    for(var key in css){
-      element.style[key] = css[key];
+  var addClass = function addClass(cls) {
+    if(this.selectedObj.length){
+      for(var i = 0, length = this.selectedObj.length; i<length;i++){
+        if(!this.hasClass(cls,i)){
+          if(this.selectedObj[i].className.slice(-1) != " "){
+            this.selectedObj[i].className += " "+cls;
+          }
+          else{
+            this.selectedObj[i].className += cls;
+          }
+        }
+      }
+    }
+    else{
+      if(!this.hasClass(cls)){
+        if(this.selectedObj.className.slice(-1) != " "){
+          this.selectedObj.className += " "+cls;
+        }
+        else{
+          this.selectedObj.className += cls;
+        }
+      }
     }
   };
+
+  var removeClass = function removeClass(cls) {
+    if(this.selectedObj.length){
+      for(var i = 0, length = this.selectedObj.length; i<length;i++){
+        if (this.hasClass(cls,i)) {
+          var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+          this.selectedObj[i].className= this.selectedObj[i].className.replace(reg,' ');
+        }
+      }
+    }
+    else{
+      if (this.hasClass(cls)) {
+        var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+        this.selectedObj.className= this.selectedObj.className.replace(reg,' ');
+      }
+    }
+  };
+  var toggleClass = function toggleClass(cls) {
+    if(this.selectedObj.length){
+      for(var i = 0, length = this.selectedObj.length; i<length;i++){
+        if(!this.hasClass(cls,i)){
+          if(this.selectedObj[i].className.slice(-1) != " "){
+            this.selectedObj[i].className += " "+cls;
+          }
+          else{
+            this.selectedObj[i].className += cls;
+          }
+        }
+        else{
+          var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+          this.selectedObj[i].className= this.selectedObj[i].className.replace(reg,' ');
+        }
+      }
+    }
+    else{
+      if(!this.hasClass(cls)){
+        if(this.selectedObj.className.slice(-1) != " "){
+          this.selectedObj.className += " "+cls;
+        }
+        else{
+          this.selectedObj.className += cls;
+        }
+      }
+      else{
+        var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+        this.selectedObj.className= this.selectedObj.className.replace(reg,' ');
+      }
+    }
+  };
+  var changeStyle = function changeStyle(css){
+    if(this.selectedObj.length){
+      for(var i = 0, length = this.selectedObj.length; i<length;i++){
+        for(var key in css){
+          this.selectedObj[i].style[key] = css[key];
+        }
+      }
+    }
+    else{
+      for(var key in css){
+        this.selectedObj[i].style[key] = css[key];
+      }
+    }
+  };
+
   var randomInRange = function randomInRange(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
@@ -90,6 +153,7 @@ var MyLib = (function myLib(){
   };
 
   var publicAPI = function selectorFunction(selector){
+    publicAPI.selectedObj = null;
     if(selector.indexOf(',') != -1){
       //That means there are several objects to change
       var selectorsArr = selector.split(',');
@@ -99,39 +163,34 @@ var MyLib = (function myLib(){
     }
     else{
       if( selector.indexOf(' ') != -1 ||
-          selector.split('.').length > 2 ||
-          selector.split('#').length > 2 ||
-          selector.indexOf(':') != -1 ||
-          (selector.charAt(0).match(/[a-z]/i) && (selector.indexOf('#') != -1 || selector.indexOf('.') != -1))){
-        //Do querySelector
+        selector.split('.').length > 2 ||
+        selector.split('#').length > 2 ||
+        selector.indexOf(':') != -1 ||
+        (selector.charAt(0).match(/[a-z]/i) && (selector.indexOf('#') != -1 || selector.indexOf('.') != -1))){
+        publicAPI.selectedObj = document.querySelectorAll(selector);
       }
       else if(selector.charAt(0) == '.'){
-        //return document.getElementsByClassName(selector.replace('.',''));
+        publicAPI.selectedObj = document.getElementsByClassName(selector.replace('.',''));
       }
       else if(selector.charAt(0) == '#'){
-        //return document.getElementById(selector.replace('#',''));
+        publicAPI.selectedObj = document.getElementById(selector.replace('#',''));
       }
       else if(selector.charAt(0).match(/[a-z]/i)){
-        //return document.getElementsByTagName(selector);
+        publicAPI.selectedObj = document.getElementsByTagName(selector);
       }
       else{
-        //do querySelector by default
+        publicAPI.selectedObj = document.querySelectorAll(selector);
       }
     }
+    return publicAPI;
   };
 
-  var selectorFunctions = {
+  var usefulFunctions = {
     hasClass : hasClass,
     addClass : addClass,
     removeClass : removeClass,
     toggleClass : toggleClass,
-    changeStyle : changeStyle
-  };
-  for(var key in selectorFunctions){
-    publicAPI.prototype[key] = selectorFunctions[key];
-  }
-
-  var usefulFunctions = {
+    changeStyle : changeStyle,
     randomInRange : randomInRange,
     checkIfMobile : checkIfMobile,
     getHashURL : getHashURL,
