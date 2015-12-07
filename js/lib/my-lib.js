@@ -1,4 +1,4 @@
-//My useful functions
+//My useful functions (With module pattern)
 var MyLib = (function myLib(){
   var hasClass = function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
