@@ -118,7 +118,7 @@ var MyLib = (function myLib(){
       results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
   };
-  var ajaxCall = function ajaxCall(options) {
+  var ajax = function ajax(options) {
     if(!options){
       throw "ajaxCall function has no argument - options!";
     }
@@ -140,18 +140,23 @@ var MyLib = (function myLib(){
 
     (customOptions.method == 'post') ? customOptions.contentType = "application/json; charset=utf-8" : customOptions.contentType = "application/x-www-form-urlencoded; charset=UTF-8'";
 
-    var xhttp =new XMLHttpRequest();
-    xhttp.setRequestHeader("Content-type", customOptions.contentType);
+    var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (xhttp.readyState == 4 && xhttp.status == 200) {
-        customOptions.success(xhttp);
+        customOptions.success(xhttp.response);
       }
     };
 
     xhttp.open(customOptions.method, customOptions.url, customOptions.async);
+    xhttp.setRequestHeader("Content-type", customOptions.contentType);
     (customOptions.method == "GET") ? xhttp.send() : xhttp.send(JSON.stringify(customOptions.data));
-  };
 
+  };
+  var click = function(callback){
+    this.selectedObj.addEventListener('click',function(e){
+      callback(e);
+    });
+  };
   var publicAPI = function selectorFunction(selector){
     publicAPI.selectedObj = null;
     if(selector.indexOf(',') != -1){
@@ -191,11 +196,12 @@ var MyLib = (function myLib(){
     removeClass : removeClass,
     toggleClass : toggleClass,
     changeStyle : changeStyle,
+    click : click,
     randomInRange : randomInRange,
     checkIfMobile : checkIfMobile,
     getHashURL : getHashURL,
     getParameterByName : getParameterByName,
-    ajaxCall : ajaxCall
+    ajax : ajax
   };
   for(var key in usefulFunctions){
     publicAPI[key] = usefulFunctions[key];
