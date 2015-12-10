@@ -16,5 +16,6 @@ In order to use the template in PHPStorm you must:
 2) Add Correct links to the valid URL array
 3) Add your database username, password and tablename to $dbCredentials array;
 
-
+//JS
+1) To use my library -> G() || G(selector)
 P.s In order to compress SVG files use SVGO (svgo --disable=cleanupIDs (folder/ or pic.svg))
