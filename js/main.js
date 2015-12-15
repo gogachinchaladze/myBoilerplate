@@ -12,7 +12,7 @@
 
   window.onload = function (e) {
     main();
-    addClass(document.getElementsByTagName('body')[0],"loaded");
+    G('body').addClass("loaded");
   };
 
   window.onresize = function (e) {
