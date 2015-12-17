@@ -114,7 +114,7 @@ MyLib.prototype.changeStyle = function(css){
 MyLib.prototype.click = function(callback){
   for(var i = 0, length = this.selectedObj.length; i<length;i++){
     this.selectedObj[i].addEventListener('click',function(e){
-      callback(e);
+      callback.call(this,e);
     });
   }
   return this;
