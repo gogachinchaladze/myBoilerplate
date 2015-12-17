@@ -22,6 +22,7 @@ MyLib.prototype.selectorManager = function(selector){
       selector.split('.').length > 2 ||
       selector.split('#').length > 2 ||
       selector.indexOf(':') != -1 ||
+      selector.indexOf('>') != -1 ||
       (selector.charAt(0).match(/[a-z]/i) && (selector.indexOf('#') != -1 || selector.indexOf('.') != -1))){
       this.selectedObjManager(document.querySelectorAll(selector));
     }
