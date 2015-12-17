@@ -1,6 +1,7 @@
 //My Library to be used instead of JQUERY
 function MyLib(selector){
   //TODO CHILDS
+  //TODO HASCLASS ON MULTIPLE SELECTING OBJECTS (classes, tagnames etc)
   if(selector){
     this.selectedObj = [];
     this.selectorManager(selector);
@@ -47,7 +48,7 @@ MyLib.prototype.selectedObjManager = function(selected){
         this.selectedObj.push(selected[i]);
       }
     }
-    else{
+    else if(typeof selected.length === "undefined"){
       this.selectedObj.push(selected);
     }
   }
@@ -186,3 +187,4 @@ MyLib.prototype.getParameterByName = function(name) {
 function G(selector){
   return new MyLib(selector);
 }
+
