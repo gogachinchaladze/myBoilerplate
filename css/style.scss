@@ -19,8 +19,10 @@
       #{'-' + $vendor + '-' + $property}: #{$value};
     }
   }
-
   #{$property}: #{$value};
+}
+@mixin transform($value){
+  @include prefixer(transform,$value,'webkit' 'moz' 'o' 'ms');
 }
 @mixin background-position($x,$y){
   background-position:$x $y;
@@ -34,6 +36,7 @@
   clear:both;
   display: block;
 }
+
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -49,6 +52,11 @@
   bottom:0;
   margin:auto;
   position: absolute;
+}
+.display-flex{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
 }
 
 @import 'reset';
@@ -69,7 +77,7 @@ html,body{
 body{
   opacity:0;
   visibility: hidden;
-//  @include prefixer(transform,translate3d(0,0,0),'webkit' 'moz' 'ms' 'o'); //if you want to include -ms- prefix too. This is basically needed for Transform!
+  //@include transform(translate3d(0,0,0));
   @include prefixer(transition,opacity .3s ease 0s);
   background: red;
 }
