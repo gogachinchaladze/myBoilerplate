@@ -2,6 +2,9 @@
 function MyLib(selector){
   //TODO CHILDS
   //TODO HASCLASS ON MULTIPLE SELECTING OBJECTS (classes, tagnames etc)
+  //TODO KEYPRESS FUNCTIONS WITH ENUM
+  //TODO INNERHTML FUNCTION 
+  //TODO CHANGE RANDOMINRANGE to RANDBETWEEN
   if(selector){
     this.selectedObj = [];
     this.selectorManager(selector);
