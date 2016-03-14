@@ -1,11 +1,12 @@
 (function(window,document){
   "use strict";
-  var windowWidth = window.innerWidth,
-      windowHeight = window.innerHeight;
+  var windowWidth = document.documentElement.clientWidth,
+      windowHeight = document.documentElement.clientHeight;
 
   var main = function(){
 
   };
+  
   document.addEventListener('DOMContentLoaded', function(){
 
   });

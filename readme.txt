@@ -21,3 +21,6 @@ In order to use the template in PHPStorm you must:
 P.s In order to compress SVG files use SVGO (svgo --disable=cleanupIDs (folder/ or pic.svg))
 
 P.S If you want to show grunt tools window, right-click the gurntfile.js and click show grunt tasks
+
+
+//TODO CHANGE CSS FOLDER STRUCTURE
