@@ -17,8 +17,22 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {                                    // Dictionary of files
-          'css/style.css': 'css/style.scss'         // 'destination': 'source'
+          'css/style.preprocessed.css': 'css/style.scss'         // 'destination': 'source'
         }
+      }
+    },
+    postcss: {
+      options: {
+        map: {
+          inline: false
+        },
+        processors: [
+          require('autoprefixer')({browsers: '> 0.5%'}) // add vendor prefixes
+        ]
+      },
+      dist: {
+        src: 'css/style.preprocessed.css',
+        dest : 'css/style.css'
       }
     },
     uglify: {
@@ -34,8 +48,8 @@ module.exports = function(grunt) {
     },
     watch: {
       css: {
-        files: ['css/*.scss'],
-        tasks: ['sass']
+        files: ['css/*.scss','css/*/*.scss'],
+        tasks: ['sass','postcss']
       },
       scripts: {
         files: ['js/lib/*.js','js/main.js'],
@@ -48,6 +62,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-postcss');
 
   // Default task(s).
   grunt.registerTask('default', ['watch']);

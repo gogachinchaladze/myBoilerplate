@@ -3,20 +3,30 @@
   var windowWidth = document.documentElement.clientWidth,
       windowHeight = document.documentElement.clientHeight;
 
-  var main = function(){
+  var htmlClassHandler = function () {
+    if(isMobile){
+      $('html').addClass('mobile')
+    }
+    if(!G().isTouch()){
+      $('html').addClass('no-touch');
+    }
+  };
 
+  var main = function(){
+    htmlClassHandler();
   };
   
   document.addEventListener('DOMContentLoaded', function(){
-
+    main();
   });
 
-  window.onload = function (e) {
-    main();
-    G('body').addClass("loaded");
-  };
+  window.addEventListener('load', function(e) {
+    $('html').addClass("loaded");
+  });
 
-  window.onresize = function (e) {
+  window.addEventListener('resize', function(e) {
+    windowWidth = document.documentElement.clientWidth;
+    windowHeight = document.documentElement.clientHeight;
+  });
 
-  };
 })(window,document);
