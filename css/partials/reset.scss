@@ -44,4 +44,7 @@ table {
 }
 a{
   text-decoration: none;
+  &:hover,&:visited,&:active{
+    color:inherit;
+  }
 }
