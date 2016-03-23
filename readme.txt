@@ -1,4 +1,4 @@
-Hello my friend!
+Hello there!
 
 In order to use the template in PHPStorm you must:
 
