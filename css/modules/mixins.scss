@@ -4,8 +4,8 @@
   -ms-background-position-y: $y;
 }
 @mixin font-face($file) {
-	$folder=$file;
-	$filepath: "../fonts/" + $folder + "/" + $file;
+	//$folder=$file;
+	$filepath: "../fonts/" + $file + "/" + $file;
 	@font-face {
 		font-family: "#{$file}";
 		src: url($filepath + ".eot");
