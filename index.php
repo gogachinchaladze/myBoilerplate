@@ -82,8 +82,14 @@ if($detect->isMobile() || $detect->isTablet()) {
   <footer>footer</footer>
 
   <?php
-    echo "<script>var isMobile = $isMobile;</script>";
+    if($isMobile){
+      echo "<script>var isMobile = true;</script>";
+    }
+    else{
+      echo "<script>var isMobile = false;</script>";
+    }
   ?>
+  
 <!--  <script src="js/script.js?v=--><?//=$random_number_for_disabling_cache?><!--"></script>-->
   <script src="js/script.js"></script>
 
