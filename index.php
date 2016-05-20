@@ -43,11 +43,9 @@ $random_number_for_disabling_cache = time();
 //Mobile Detection
 require_once 'php/Mobile_Detect.php';
 $detect = new Mobile_Detect;
-$mobile = false;
-if($detect->isMobile() || $detect->isTablet()) {
-  $mobile = true;
-}
-//?>
+$is_mobile = $detect->isMobile();
+$is_tablet = $detect->isTablet();
+?>
 
 <!DOCTYPE html>
 <html>
@@ -89,7 +87,10 @@ if($detect->isMobile() || $detect->isTablet()) {
       echo "<script>var isMobile = false;</script>";
     }
   ?>
-  
+  <script>
+    var isMobile = <?= $is_mobile ?>;
+    var isTablet = <?= $is_tablet ?>;
+  </script>
 <!--  <script src="js/script.js?v=--><?//=$random_number_for_disabling_cache?><!--"></script>-->
   <script src="js/script.js"></script>
 
