@@ -79,17 +79,9 @@ $is_tablet = $detect->isTablet();
   <section>section</section>
   <footer>footer</footer>
 
-  <?php
-    if($isMobile){
-      echo "<script>var isMobile = true;</script>";
-    }
-    else{
-      echo "<script>var isMobile = false;</script>";
-    }
-  ?>
   <script>
-    var isMobile = <?= $is_mobile ?>;
-    var isTablet = <?= $is_tablet ?>;
+    <?= "var isMobile=" . (($is_mobile) ? 'true' : 'false')?>;
+    <?= "var isTablet=" . (($is_tablet) ? 'true' : 'false')?>;
   </script>
 <!--  <script src="js/script.js?v=--><?//=$random_number_for_disabling_cache?><!--"></script>-->
   <script src="js/script.js"></script>
