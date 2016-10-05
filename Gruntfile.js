@@ -6,9 +6,16 @@ module.exports = function(grunt) {
       options: {
         separator: "\n"
       },
-      dist: {
-        src: ['js/lib/*.js','js/main.js'],
-        dest: 'js/script.js'
+      // dist: {
+      //   src: ['js/lib/*.js','js/main.js'],
+      //   dest: 'js/script.js'
+      // }
+      basic_and_extras: {
+        files: {
+          'js/script.js': ['js/main.js'],
+          // 'js/script.js': ['js/main.js', 'js/angular/app.js','js/angular/controllers.js','js/angular/app.config.js','js/angular/directives.js','js/angular/services.js','js/angular/filters.js'],
+          'js/lib.js': ['js/lib/*.js']
+        }
       }
     },
     sass: {
