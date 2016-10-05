@@ -84,6 +84,8 @@ $is_tablet = $detect->isTablet();
     <?= "var isTablet=" . (($is_tablet) ? 'true' : 'false')?>;
   </script>
 <!--  <script src="js/script.js?v=--><?//=$random_number_for_disabling_cache?><!--"></script>-->
+  <script src="js/lib.js"></script>
   <script src="js/script.js"></script>
+  <script src="//localhost:35729/livereload.js"></script>
 
 </body>
