@@ -47,6 +47,10 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      options: {
+        livereload: true,
+        files: ['css/style.css', 'js/script.js','*.php', '*.html'],
+      },
       css: {
         files: ['css/*.scss','css/*/*.scss'],
         tasks: ['sass','postcss']
@@ -54,7 +58,10 @@ module.exports = function(grunt) {
       scripts: {
         files: ['js/lib/*.js','js/main.js'],
         tasks: ['concat', 'uglify']
-      }
+      },
+      other: {
+        files: ['*.php', '*.html']
+      },
     }
   });
 
