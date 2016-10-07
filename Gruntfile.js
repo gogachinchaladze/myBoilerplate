@@ -66,9 +66,13 @@ module.exports = function(grunt) {
         files: ['js/lib/*.js','js/main.js'],
         tasks: ['concat', 'uglify']
       },
-      other: {
+      livereloadFiles: {
         files: ['*.php', '*.html']
       },
+      svgstore:{
+        files:['img/svg-icons/*.svg'],
+        tasks:['svgstore']
+      }
     }
   });
 
@@ -77,6 +81,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-svgstore');
 
   // Default task(s).
   grunt.registerTask('default', ['watch']);
