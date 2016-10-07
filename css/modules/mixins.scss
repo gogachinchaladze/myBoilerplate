@@ -4,18 +4,22 @@
   -ms-background-position-y: $y;
 }
 @mixin font-face($font-family, $font-weight, $font-style) {
-	$filepath: "../fonts/" + $font-family;
-	
+	$filepath: "../fonts/";
+	$font-name: $font-family;
+
 	@if($font-weight != normal) {
-      $filepath : $filepath + capitalize($font-weight);
+      $font-name : $font-name + capitalize($font-weight);
 	}
 	@if($font-style != normal) {
-	  $filepath : $filepath + capitalize($font-style);
+      $font-name : $font-name + capitalize($font-style);
 	}
+
+  $filepath : $filepath + $font-name;
+
 	@font-face {
 		font-family: "#{$font-family}";
 		src: url($filepath + ".eot");
-		src: url($filepath + ".eot?#iefix") format('embedded-opentype'), url($filepath + ".woff") format('woff'), url($filepath + ".ttf") format('truetype'), url($filepath + ".svg#" + $font-family + "") format('svg');
+		src: url($filepath + ".eot?#iefix") format('embedded-opentype'), url($filepath + ".woff") format('woff'), url($filepath + ".ttf") format('truetype'), url($filepath + ".svg#" + $font-name) format('svg');
 		font-weight:$font-weight;
 		font-style:$font-style;
 	}
