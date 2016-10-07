@@ -35,6 +35,8 @@ body{
   transition: opacity $body-fadein-time ease 0s;
   background-color: $website-brand-secondary;
 }
-
+#svg-container{
+  display: none;
+}
 
 @import 'partials/media';

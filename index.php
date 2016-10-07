@@ -74,6 +74,13 @@ $is_tablet = $detect->isTablet();
 
 </head>
 <body>
+
+  <div id="svg-container">
+    <?php //include 'img/svg-icons.svg'; ?>
+  </div>
+  <!--svg viewBox="0 0 141 35" class="main-logo">
+    <use xlink:href="#logo"></use>
+  </svg-->
   <header>header</header>
   <nav>navigation</nav>
   <section>section</section>
