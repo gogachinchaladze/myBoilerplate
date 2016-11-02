@@ -9,7 +9,7 @@
 
 html,body{
   width:100%;
-  height:100%; //For full pages
+  //height:100%; //For full pages
   min-width: 320px;
 }
 html{
@@ -29,7 +29,7 @@ html{
 body{
   font-family: 'Open Sans', sans-serif;
   color:$website-text-color;
-  overflow:hidden;
+  //overflow:hidden;
   position: relative;
   @extend .is-invisible;
   transition: opacity $body-fadein-time ease 0s;
