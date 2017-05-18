@@ -1,35 +1,86 @@
 {
     "pages": {
-
+        "landing" : {
+            "texts" : {
+                "mainTitle" : {
+                    "en" : "Welcome to Landing Page",
+                    "ka" : "მოგესალმებით მთავარი გვერდიდან!"
+                }
+            },
+            "tags" : {
+                "title": {
+                    "en" : "Basic Template",
+                    "ka" : "შაბლონი"
+                },
+                "description": "",
+                "fbTitle": "",
+                "fbDescription": "",
+                "fbImage": ""
+            },
+            "className" : "landing",
+            "url" : {
+                "en" : "/",
+                "ka" : "/"
+            }
+        },
+        "404" : {
+            "texts" : {
+                "mainTitle" : {
+                    "en" : "<em>404</em>Nothing to see here!",
+                    "ka" : "<em>404</em>სხვაგან მოხვდით!"
+                }
+            },
+            "tags" : {
+                "title": {
+                    "en" : "404 Nothing to see here!",
+                    "ka" : "404 სხვაგან მოხვდით!"
+                },
+                "description": "",
+                "fbTitle": "",
+                "fbDescription": "",
+                "fbImage": ""
+            },
+            "url" : {
+                "en" : "/",
+                "ka" : "/"
+            }
+        }
     },
-    "tags": {
-        "title": {
-            "en": "",
-            "ge": ""
+    "contact" : {
+        "mail" : "",
+        "phone" : "",
+        "social" : {
+            "fbAppId" : "",
+            "facebook" : "",
+            "instagram" : ""
         },
-        "description": {
-            "en": "",
-            "ge": ""
+        "location" : {
+            "country" : {
+                "en" : "Georgia",
+                "ka" : "საქართველო"
+            },
+            "city" : {
+                "en" : "Tbilisi",
+                "ka" : "თბილისი"
+            },
+            "address" : {
+                "en" : "",
+                "ka" : ""
+            },
+            "zipCode" : "",
+            "googleMaps" : ""
+        }
+    },
+    "languages" : {
+        "ka" : {
+            "title" : "Georgian",
+            "abbr" : "ქარ",
+            "hrefLang" : "ka-ge"
         },
-        "url": {
-            "en": "/en",
-            "ge": "/ge"
-        },
-        "fb-title": {
-          "en": "",
-          "ge": ""
-        },
-        "fb-description": {
-            "en": "",
-            "ge": ""
-        },
-        "image" : {
-            "en" : "",
-            "ge" : ""
-        },
-        "app-id" : {
-            "en" : "",
-            "ge" : ""
+        "en" : {
+            "title" : "English",
+            "abbr" : "Eng",
+            "hrefLang" : "en"
         }
     }
 }

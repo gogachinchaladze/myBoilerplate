@@ -6,10 +6,6 @@ module.exports = function(grunt) {
       options: {
         separator: "\n"
       },
-      // dist: {
-      //   src: ['js/lib/*.js','js/main.js'],
-      //   dest: 'js/script.js'
-      // }
       basic_and_extras: {
         files: {
           'js/script.js': ['js/main.js'],
@@ -53,6 +49,21 @@ module.exports = function(grunt) {
         }
       }
     },
+    svgstore: {
+      options: {
+        //prefix : 'icon-', // This will prefix each ID
+        inheritviewbox: true,
+        svg: { // will add and overide the the default xmlns="http://www.w3.org/2000/svg" attribute to the resulting SVG
+          viewBox : '0 0 100 100',
+          xmlns: 'http://www.w3.org/2000/svg'
+        }
+      },
+      default : {
+        files: {
+          'img/svg-icons.svg': ['img/svg-icons/*.svg'],
+        },
+      },
+    },
     watch: {
       options: {
         livereload: true,
@@ -72,6 +83,12 @@ module.exports = function(grunt) {
       svgstore:{
         files:['img/svg-icons/*.svg'],
         tasks:['svgstore']
+      },
+      configFiles: {
+        files: [ 'Gruntfile.js', 'package.json'],
+        options: {
+          reload: true
+        }
       }
     }
   });
