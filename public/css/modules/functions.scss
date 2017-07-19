@@ -10,3 +10,11 @@
 @function em($px,$context:16){
   @return ($px / $context)*1em;
 }
+
+@function randomColor(){
+  $red: random(256)-1;
+  $green: random(256)-1;
+  $blue: random(256)-1;
+
+  @return rgb($red, $green, $blue);
+}
