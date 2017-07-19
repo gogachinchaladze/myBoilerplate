@@ -16,7 +16,7 @@ $parsed_uri = parse_url($_SERVER['REQUEST_URI']);
 
 $req_uri = $parsed_uri['path'];
 
-$is_bot = preg_match('/bot|spider|crawl|curl|slurp|^$/i', strtolower($_SERVER['HTTP_USER_AGENT']));
+$is_bot = preg_match('/bot|spider|crawl|curl|slurp|facebookexternalhit|facebot^$/i', strtolower($_SERVER['HTTP_USER_AGENT']));
 
 $default_lang = DEFAULT_LANG;
 $default_page = DEFAULT_PAGE_ID;
@@ -171,7 +171,7 @@ $is_mobile = $detect->isMobile();
 $is_tablet = $detect->isTablet();
 
 //Just a random number
-$random_number_for_disabling_cache = time();
+$version_number = 1;
 $page_class= (isset($texts['pages'][$page]['className'])) ? $texts['pages'][$page]['className'] : $page;
 
 ?>
@@ -182,14 +182,13 @@ $page_class= (isset($texts['pages'][$page]['className'])) ? $texts['pages'][$pag
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=1"/>
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=<?=$version_number?>"/>
 
   <!--  for Android-->
   <meta name="theme-color" content="#FFFFFF">
-  <link rel="icon" sizes="192x192" href="/img/favicon192.png">
+  <link rel="icon" sizes="192x192" href="/img/favicon192.png?v=<?=$version_number?>">
 
-  <link rel="stylesheet" href="/css/style.css">
-<!--  <link rel="stylesheet" href="css/style.css?v=--><?//=$random_number_for_disabling_cache?><!--">-->
+  <link rel="stylesheet" href="css/style.css?v=<?=$version_number?>">
 
   <title><?=$texts['pages'][$page]['tags']['title'][$lang]?></title>
 
@@ -216,13 +215,13 @@ $page_class= (isset($texts['pages'][$page]['className'])) ? $texts['pages'][$pag
 <body>
 
   <div id="svg-container">
-    <?php //include 'img/svg-icons.svg'; ?>
+    <img src="img/svg-icons.svg?v=<?=$version_number?>" alt="Svg icons preloader">
   </div>
   <header>
     <a href="<?=getFullUrl($lang,$texts['pages']['landing'][$lang]['url'])?>">
       LOGO
       <!--svg viewBox="0 0 141 35" class="main-logo">
-        <use xlink:href="#logo"></use>
+        <use xlink:href="img/svg-icons.svg#logo"></use>
       </svg-->
     </a>
   </header>
@@ -252,7 +251,7 @@ $page_class= (isset($texts['pages'][$page]['className'])) ? $texts['pages'][$pag
     <?= "var isTablet=" . (($is_tablet) ? 'true' : 'false')?>;
   </script>
 <!--  <script src="js/script.js?v=--><?//=$random_number_for_disabling_cache?><!--"></script>-->
-  <script src="/js/lib.js"></script>
-  <script src="/js/script.js"></script>
+  <script src="/js/lib.js?v=<?=$version_number?>"></script>
+  <script src="/js/script.js?v=<?=$version_number?>"></script>
   <script src="//localhost:35729/livereload.js"></script>
 </body>
