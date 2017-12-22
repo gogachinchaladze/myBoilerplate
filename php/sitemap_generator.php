@@ -2,11 +2,11 @@
 //TODO BEAUTIFY STRING
 //TODO PHP CRON RUN ONCE A DAY
 
-require_once '../php/cfg.php';
-require_once '../php/helpers.php';
+require_once 'cfg.php';
+require_once 'helpers.php';
 
-$texts = json_decode(file_get_contents("../php/texts.json"), true);
-$sitemap = fopen("sitemap.xml", "w") or die("Unable to open file!");
+$texts = json_decode(file_get_contents("texts.json"), true);
+$sitemap = fopen("../public/sitemap.xml", "w") or die("Unable to open file!");
 $website_url = MAIN_URL;
 $forbidden_pages = ['404'];
 

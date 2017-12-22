@@ -1,14 +1,8 @@
 <?php
 
-//TODO LATER move texts.json to db (mongo?!)
-//TODO LATER admin panel to edit texts.json
-//TODO LATER OOP version with classes and stuff
-
 require_once('../php/country_detect.php');
 require_once('../php/cfg.php');
 require_once('../php/helpers.php');
-
-
 
 $texts = json_decode(file_get_contents('../php/texts.json'),true);
 
@@ -141,9 +135,9 @@ function getPreferredLanguageAndSetIfNotAlreadySet(){
     if($country_code == 'ge'){
       $pref_lang = 'ka';
     }
-    else if(isset($texts['languages']['ru']) && ($country_code == 'am' || $country_code == 'az' || $country_code == 'ru')){
-      $pref_lang = 'ru';
-    }
+//    else if(isset($texts['languages']['ru']) && ($country_code == 'am' || $country_code == 'az' || $country_code == 'ru')){
+//      $pref_lang = 'ru';
+//    }
     else if(isset($texts['languages']['en'])){
       $pref_lang = 'en';
     }
@@ -153,16 +147,8 @@ function getPreferredLanguageAndSetIfNotAlreadySet(){
     setcookie($language_cookie_name, $pref_lang, $language_cookie_time, "/");
 
     return $pref_lang;
-//    if(isUserFromGeorgia()){
-//      return 'ka';
-//    }
-//    else{
-//      return 'en';
-//    }
   }
 }
-
-//$second_lang = ($lang == "ka") ? "en" : "ka";
 
 //Mobile Detection
 require_once('../php/mobile_detect.php');
@@ -176,82 +162,6 @@ $page_class= (isset($texts['pages'][$page]['className'])) ? $texts['pages'][$pag
 
 ?>
 
-<!DOCTYPE html>
-<html class = "<?=$lang?> <?= $page_class?>">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=<?=$version_number?>"/>
-
-  <!--  for Android-->
-  <meta name="theme-color" content="#FFFFFF">
-  <link rel="icon" sizes="192x192" href="/img/favicon192.png?v=<?=$version_number?>">
-
-  <link rel="stylesheet" href="css/style.css?v=<?=$version_number?>">
-
-  <title><?=$texts['pages'][$page]['tags']['title'][$lang]?></title>
-
-  <meta name="description" content="<?= $texts['pages'][$page]['tags']['description'][$lang]?>" />
-  <meta property="fb:app_id" content="<?= $texts['contact']['social']['fbAppId']?>" />
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="<?= getFullUrl($lang,$texts['pages'][$page]['tags']['fbImage'], $website_url)?>">
-  <meta property="og:url" content="<?= $full_url?>">
-  <meta property="og:title" content="<?= $texts['pages'][$page]['tags']['fbTitle'][$lang]?>">
-  <meta property="og:description" content="<?= $texts['pages'][$page]['tags']['fbDescription'][$lang]?>">
-
-  <?php
-  foreach($texts['pages'][$page]['url'] as $curr_lang => $url){
-    if($curr_lang != $lang){
-      $full_url = getFullUrl($curr_lang,$url,$website_url);
-      $full_url = (!$is_bot && $curr_lang==$default_lang && $full_url=="/" && $lang != $default_lang) ? $full_url."?lang=$curr_lang" : $full_url;
-      $hreflang = $texts['languages'][$curr_lang]['hrefLang'];
-      echo "<link rel=\"alternate\" href=\"$full_url\" hreflang=\"$hreflang\" /> ";
-    }
-  }
-  ?>
-
-</head>
-<body>
-
-  <div id="svg-container">
-    <img src="img/svg-icons.svg?v=<?=$version_number?>" alt="Svg icons preloader">
-  </div>
-  <header>
-    <a href="<?=getFullUrl($lang,$texts['pages']['landing'][$lang]['url'])?>">
-      LOGO
-      <!--svg viewBox="0 0 141 35" class="main-logo">
-        <use xlink:href="img/svg-icons.svg#logo"></use>
-      </svg-->
-    </a>
-  </header>
-  <nav>
-    <ul id="language-switcher-container">
-      <?php
-        foreach($texts['pages'][$page]['url'] as $curr_lang => $url){
-          //CHECK IF LANGUAGE IS SAME AS NOW if($curr_lang != $lang){
-          $lang_title = $texts['languages'][$curr_lang]['title'];
-          $abbr = $texts['languages'][$curr_lang]['abbr'];
-          $full_url = getFullUrl($curr_lang,$url);
-          $full_url = (!$is_bot && trim($full_url,'/')=="" && $lang != $default_lang) ? $full_url."?lang=$curr_lang" : $full_url;
-          $active = ($curr_lang == $lang) ? "active" : "";
-
-          echo "<li><a href='$full_url' hreflang='$curr_lang' class='$active'>
-                 <abbr lang='$curr_lang' title='$lang_title'>$abbr</abbr>
-                </a></li>";
-        }
-      ?>
-    </ul>
-  </nav>
-  <section><?php include_once "../templates/$page.php"?></section>
-  <footer>footer</footer>
-
-  <script>
-    <?= "var isMobile=" . (($is_mobile) ? 'true' : 'false')?>;
-    <?= "var isTablet=" . (($is_tablet) ? 'true' : 'false')?>;
-  </script>
-<!--  <script src="js/script.js?v=--><?//=$random_number_for_disabling_cache?><!--"></script>-->
-  <script src="/js/lib.js?v=<?=$version_number?>"></script>
-  <script src="/js/script.js?v=<?=$version_number?>"></script>
-  <script src="//localhost:35729/livereload.js"></script>
-</body>
+<?php
+  @include('../resources/views/layout.php');
+?>

@@ -11,11 +11,11 @@
       $('html').addClass('no-touch');
     }
   };
-
+  
   var main = function(){
     htmlClassHandler();
   };
-  
+
   document.addEventListener('DOMContentLoaded', function(){
     main();
   });

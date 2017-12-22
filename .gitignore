@@ -3,3 +3,10 @@ node_modules
 .sass-cache
 .git
 .bower
+*.log
+php/cfg.php
+yarn.lock
+public/css/style.css
+public/js/lib.min.js
+public/js/script.min.js
+public/js/script.min.js.map

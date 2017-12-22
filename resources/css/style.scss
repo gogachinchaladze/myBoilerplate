@@ -27,7 +27,7 @@ html{
   }
 }
 body{
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'NotoSans', sans-serif;
   color:$website-text-color;
   //overflow:hidden;
   position: relative;
@@ -40,3 +40,4 @@ body{
 }
 @import 'pages/pages';
 @import 'partials/media';
+
