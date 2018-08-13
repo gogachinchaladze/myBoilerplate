@@ -36,7 +36,7 @@ body{
   background-color: $website-brand-secondary;
 }
 #svg-container{
-  display: none;
+  height: 0; width: 0; position: absolute; visibility: hidden;
 }
 @import 'pages/pages';
 @import 'partials/media';
