@@ -2,19 +2,35 @@
   @return inspect($value);
 }
 
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
 @function capitalize($string) {
   $string : to-string($string);
   @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
 }
 
 @function em($px,$context:16){
-  @return ($px / $context)*1em;
+  @return (strip-unit($px) / strip-unit($context))*1em;
 }
 
-@function randomColor(){
-  $red: random(256)-1;
-  $green: random(256)-1;
-  $blue: random(256)-1;
+@function px($px){
+  @return $px *1px;
+}
 
-  @return rgb($red, $green, $blue);
+@function middle-color($col-1, $col-2){
+
+  $middle-red: (red($col-1) + red($col-2))/2;
+  $middle-green:(green($col-1) + green($col-2))/2;
+  $middle-blue:(blue($col-1) + blue($col-2))/2;
+
+  @return rgb($middle-red,$middle-green,$middle-blue);
+}
+@function letter-spacing($photoshop-value,$font-size) {
+  @return #{($photoshop-value*$font-size)/1000};
 }
