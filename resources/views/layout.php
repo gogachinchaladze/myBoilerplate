@@ -15,6 +15,8 @@
   <title><?=$texts['pages'][$page]['tags']['title'][$lang]?></title>
 
   <meta name="description" content="<?= $texts['pages'][$page]['tags']['description'][$lang]?>" />
+
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="fb:app_id" content="<?= $texts['contact']['social']['fbAppId']?>" />
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= getFullUrl($lang,$texts['pages'][$page]['tags']['fbImage'], $website_url)?>">
